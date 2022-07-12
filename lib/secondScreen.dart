@@ -253,9 +253,7 @@ class SecondScreenState extends State<SecondScreen> {
   chickAnswer(int answer) {
     if (answer == rightAnswer) {
       score++;
-      newQuestions();
-    } else {
-      newQuestions();
     }
+    newQuestions();
   }
 }
