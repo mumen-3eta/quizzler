@@ -16,6 +16,8 @@ class FirstScreenState extends State<FirstScreen> {
   final double progress = (1.0 / questions.length);
   double progressValue = 0.0;
   late bool hasWon;
+  String winMassege = 'Congratulations You Have Won';
+  String loseMassege = 'You Have Lost Better Luck Next Time';
   updateQuestion() {
     progressValue += progress;
     setState(() {});
@@ -23,13 +25,14 @@ class FirstScreenState extends State<FirstScreen> {
     if (index == 13) {
       hasWon = score > 6;
       index = 0;
+      String massege = hasWon ? winMassege : loseMassege;
       showDialog(
           barrierDismissible: false,
           context: context,
           builder: (context) {
             return AlertDialog(
               title: const Text('End of Quiz'),
-              content: Text('Your Score is $score out of 13'),
+              content: Text('$massege and Your Score is $score out of 13'),
               actions: [
                 hasWon
                     ? Lottie.asset('assets/animation/win.json')

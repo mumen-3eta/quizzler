@@ -26,8 +26,10 @@ class SecondScreenState extends State<SecondScreen> {
   int start = 60;
   bool isVisible = true;
   int score = 0;
-  late bool haswom;
+  late bool hasWom;
   bool animate = true;
+  String winMassege = 'Congratulations You Have Won';
+  String loseMassege = 'You Have Lost Better Luck Next Time';
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
@@ -35,8 +37,9 @@ class SecondScreenState extends State<SecondScreen> {
       oneSec,
       (timer) {
         if (start == 0) {
-          haswom = score > numberOfQuestions / 2;
+          hasWom = score > numberOfQuestions / 2;
           animate = false;
+          String massege = hasWom ? winMassege : loseMassege;
           setState(() {
             showDialog(
                 barrierDismissible: false,
@@ -45,9 +48,9 @@ class SecondScreenState extends State<SecondScreen> {
                   return AlertDialog(
                     title: const Text('End of Quiz'),
                     content: Text(
-                        'Your Score is $score out of $numberOfQuestions questions'),
+                        '$massege and Your Score is $score out of $numberOfQuestions questions'),
                     actions: [
-                      haswom
+                      hasWom
                           ? Lottie.asset('assets/animation/win.json')
                           : Lottie.asset('assets/animation/lose.json'),
                       TextButton(
